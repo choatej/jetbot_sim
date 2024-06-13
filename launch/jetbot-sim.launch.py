@@ -43,10 +43,19 @@ def generate_launch_description():
     robot_model_path = os.path.join(
         get_package_share_directory(package_name))
 
-    urdf_file = os.path.join(robot_model_path, 'urdf', 'sparkfun-jetbot.urdf')
-    with open(urdf_file, 'r') as f:
-        doc = f.read()
-    params = {'robot_description': doc}
+    xacro_file = os.path.join(robot_model_path, 'xacro', 'my-jetbot.xacro')
+
+    # convert XACRO file into URDF
+    print("parsing xacro doc")
+    doc = xacro.parse(open(xacro_file))
+    xacro.process_doc(doc)
+    params = {'robot_description': doc.toxml()}
+
+    # save for debugging
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    outfile_file = os.path.join("/tmp", f"{os.path.splitext(os.path.split(xacro_file)[-1])[0]}-{timestamp}.urdf")
+    with open(outfile_file, 'w') as f:
+        f.write(doc.toprettyxml(indent="    "))
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -60,11 +69,8 @@ def generate_launch_description():
     position = [0.0, 0.0, 0.2]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
-    # Base Name or robot
-    robot_base_name = "jetbot"
 
-
-    entity_name = robot_base_name+"-"+str(int(random.random()*100000))
+    entity_name = 'jetbot'
 
     # Spawn ROBOT Set Gazebo
     spawn_robot = Node(
@@ -82,7 +88,7 @@ def generate_launch_description():
                    ]
     )
 
-    # RVIZ Configuration
+        # RVIZ Configuration
     rviz_config_file = os.path.join(get_package_share_directory(package_name), 'rviz', 'config.rviz')
     print(f'rviz config dir: {rviz_config_file}')
 
@@ -93,8 +99,7 @@ def generate_launch_description():
             output='screen',
             name='rviz_node',
             parameters=[{'use_sim_time': True}],
-            # arguments=['-d', rviz_config_file]
-    )
+            arguments=['-d', rviz_config_file])
 
     return LaunchDescription([
         gazebo,

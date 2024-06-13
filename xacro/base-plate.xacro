@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="base-plate">
-    <xacro:macro name="wheel" params="name parent joint_origin_xyz">
+    <xacro:macro name="base-plate" params="name parent joint_origin_xyz">
         <link name="${name}_link">
         <visual>
           <geometry>
