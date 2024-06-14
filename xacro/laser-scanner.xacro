@@ -1,35 +1,32 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="laser_scanner">
-  <xacro:macro name="laser_scanner">
-    <xacro:arg name="include_laser" default="true"/>
-    <xacro:if value="${include_laser}">
-        <link name="hokuyo_link"> <!-- aka laser_scan_link -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ydlidar">
+  <xacro:macro name="ydlidar" params="name package parent joint_origin_xyz">
+        <link name="${name}_link">
             <visual>
-            <origin rpy="0 0 0" xyz="0.03 0 0.003"/>
-            <geometry>
-                <mesh filename="package://barista_robot_description/meshes/hokuyo_urg_04lx.dae" />
-            </geometry>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://${package}/meshes/hokuyo_urg_04lx.dae" />
+                </geometry>
             </visual>
             <inertial>
-            <!-- from https://www.hokuyo-aut.jp/dl/Specifications_URG-04LX_1513063395.pdf -->
-            <mass value="0.16"/>
-            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+                <mass value="0.16"/>
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
             </inertial>
             <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="package://barista_robot_description/meshes/hokuyo_urg_04lx.stl" />
-            </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://${package}/meshes/hokuyo_urg_04lx.stl" />
+                </geometry>
             </collision>
         </link>
 
-        <joint name="hokuyo_joint" type="fixed"> <!-- aka laser_scan_link_joint-->
-            <parent link="base_link"/>
-            <child link="hokuyo_link"/>
-            <origin xyz="0.1 0 0.08" rpy="0 0 1.5707" />
+        <joint name="${name}_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${name}_link"/>
+            <origin rpy="0 0 0"  xyz="${joint_origin_xyz}" />
         </joint>
 
-        <gazebo reference="hokuyo_link">
+        <gazebo reference="${name}_link">
             <sensor name="head_hokuyo_sensor" type="ray">
             <pose>0 0 0 0 0 0</pose>
             <ray>
@@ -64,7 +61,6 @@
             </plugin>
             </sensor>
         </gazebo>
-    </xacro:if>
   </xacro:macro>
   </robot>
 
