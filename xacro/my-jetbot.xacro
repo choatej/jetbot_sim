@@ -14,7 +14,7 @@
 <xacro:base-plate
     name = "base"
     parent = "odom"
-    joint_origin_xyz = "0 0 0.0445"
+    joint_origin_xyz = "0 0 0"
 />
 
 <xacro:standoff
@@ -58,6 +58,61 @@
     name = "level2"
     parent = "standoff2"
     joint_origin_xyz = "-0.06277 -0.04275 0.02125"
+/>
+
+<xacro:standoff
+    name ="standoff5"
+    radius = "0.0025"
+    length = "0.081"
+    mass = "0.5"
+    parent = "level2_link"
+    joint_origin_xyz = "-0.06277 0.042975 0.01975"
+/>
+
+<xacro:standoff
+    name ="standoff6"
+    radius = "0.0025"
+    length = "0.081"
+    mass = "0.5"
+    parent = "level2_link"
+    joint_origin_xyz = "0.06277 0.042975 0.01975"
+/>
+
+<xacro:standoff
+    name ="standoff7"
+    radius = "0.0025"
+    length = "0.081"
+    mass = "0.5"
+    parent = "level2_link"
+    joint_origin_xyz = "0.06277 -0.042975 0.01975"
+/>
+
+<xacro:standoff
+    name ="standoff8"
+    radius = "0.0025"
+    length = "0.081"
+    mass = "0.5"
+    parent = "level2_link"
+    joint_origin_xyz = "-0.06277 -0.042975 0.01975"
+/>
+
+<!-- level 3 -->
+<xacro:base-plate
+    name = "level3"
+    parent = "standoff6"
+    joint_origin_xyz = "-0.06277 -0.04275 0.039"
+/>
+
+<xacro:wheel
+    name = "left_wheel"
+    parent = "base_link"
+    joint_origin_xyz = "0.047135 0.05625 0.008125"
+/>
+
+<xacro:wheel
+    name = "right_wheel"
+    parent = "base_link"
+    joint_origin_xyz = "0.047135 -0.05625 0.008125"
 />
 
 </robot>
