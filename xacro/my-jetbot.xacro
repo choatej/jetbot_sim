@@ -4,7 +4,7 @@
     <xacro:include filename="$(find jetbot_sim)/xacro/standoff.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/wheel.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/base-plate.xacro"/>
-    <xacro:include filename="$(find jetbot_sim)/xacro/laser-scanner.xacro"/>
+    <xacro:include filename="$(find jetbot_sim)/xacro/ydlidar.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/camera.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/imu.xacro"/>
 
@@ -207,11 +207,46 @@
         <axis xyz="0 0 1"/>
     </joint>
 
-    <xacro:ydlidar
-        name = "ydlidar"
-        package = "jetbot_sim"
+    <xacro:standoff
+        name = "standoff11"
+        radius = "0.0025"
+        length = "0.033"
+        mass = "0.1"
         parent = "level3_link"
-        joint_origin_xyz = "0 0 0.0015"
+        joint_origin_xyz = "-0.05977 -0.0315 0.018"
+    />
+
+        <xacro:standoff
+        name = "standoff12"
+        radius = "0.0025"
+        length = "0.033"
+        mass = "0.1"
+        parent = "level3_link"
+        joint_origin_xyz = "-0.05977 0.0315 0.018"
+    />
+
+        <xacro:standoff
+        name = "standoff13"
+        radius = "0.0025"
+        length = "0.033"
+        mass = "0.1"
+        parent = "level3_link"
+        joint_origin_xyz = "-0.00477 -0.0315 0.018"
+    />
+
+    <xacro:standoff
+        name = "standoff14"
+        radius = "0.0025"
+        length = "0.033"
+        mass = "0.1"
+        parent = "level3_link"
+        joint_origin_xyz = "-0.00477 0.0315 0.018"
+    />
+
+        <xacro:ydlidar
+        name = "primary"
+        parent = "standoff14"
+        joint_origin_xyz = "-0.01 -0.032 0.0215"
     />
 
     <xacro:camera
