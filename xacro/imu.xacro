@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="imu">
+    <xacro:macro name="imu" params="name parent joint_origin_rpy joint_origin_xyz">
+       <!-- Define the IMU link -->
+        <link name="${name}_imu_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.01 0.003"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.02 0.01 0.003"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.02"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+            </inertial>
+        </link>
+
+        <!-- Joint to attach the IMU to the robot -->
+        <joint name="${name}_imu_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${name}_imu_link"/>
+            <origin rpy="${joint_origin_rpy}" xyz="${joint_origin_xyz}" />
+        </joint>
+
+        <!-- Sensor plugin for Gazebo simulation -->
+        <gazebo reference="${name}_imu_link">
+            <material>Gazebo/Green</material>
+            <plugin name="imu_sensor_controller" filename="libgazebo_ros_imu.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>100.0</updateRate>
+                <bodyName>imu_link</bodyName>
+                <topicName>/imu/data</topicName>
+                <gaussianNoise>0.01</gaussianNoise>
+                <xyzOffset>0 0 0</xyzOffset>
+                <rpyOffset>0 0 0</rpyOffset>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

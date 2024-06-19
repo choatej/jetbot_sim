@@ -5,8 +5,12 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://${package}/meshes/hokuyo_urg_04lx.dae" />
+                    <mesh
+                            filename="package://${package}/meshes/hokuyo_urg_04lx.dae"
+                            scale = "0.8 0.8 0.8"
+                    />
                 </geometry>
+                <material name="Gazebo/Blue"/>
             </visual>
             <inertial>
                 <mass value="0.16"/>
@@ -15,7 +19,10 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://${package}/meshes/hokuyo_urg_04lx.stl" />
+                    <mesh
+                            filename="package://${package}/meshes/hokuyo_urg_04lx.stl"
+                            scale = "0.3 0.3 0.3"
+                    />
                 </geometry>
             </collision>
         </link>
@@ -27,6 +34,7 @@
         </joint>
 
         <gazebo reference="${name}_link">
+            <material>Gazebo/Blue</material>
             <sensor name="head_hokuyo_sensor" type="ray">
             <pose>0 0 0 0 0 0</pose>
             <ray>

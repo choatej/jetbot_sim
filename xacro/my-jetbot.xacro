@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
-    <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="jetbot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="jetbot">
 
     <xacro:include filename="$(find jetbot_sim)/xacro/standoff.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/wheel.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/base-plate.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/laser-scanner.xacro"/>
+    <xacro:include filename="$(find jetbot_sim)/xacro/camera.xacro"/>
+    <xacro:include filename="$(find jetbot_sim)/xacro/imu.xacro"/>
 
     <!-- odom, so base_link can have inertia -->
     <link name="odom"/>
@@ -210,5 +212,19 @@
         package = "jetbot_sim"
         parent = "level3_link"
         joint_origin_xyz = "0 0 0.0015"
+    />
+
+    <xacro:camera
+        name = "front_camera"
+        parent = "level2_link"
+        joint_origin_xyz = "0 0 0"
+        joint_origin_rpy = "0 0 0"
+    />
+
+    <xacro:imu
+        name = "default"
+        parent = "level3_link"
+        joint_origin_xyz = "0 -0.03975 0.02"
+        joint_origin_rpy = "0 0 0"
     />
 </robot>

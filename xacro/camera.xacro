@@ -1,0 +1,63 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
+    <xacro:macro name="camera" params="name parent joint_origin_xyz joint_origin_rpy">
+        <link name="${name}_camera_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.04 0.04 0.02"/>
+                </geometry>
+                <material name="black">
+                    <color rgba="0 0 0 1"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.04 0.04 0.02"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.05"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+            </inertial>
+        </link>
+
+        <joint name="${name}_camera_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${name}_camera_link"/>
+            <origin rpy="${joint_origin_rpy}" xyz="${joint_origin_xyz}" />
+        </joint>
+
+        <gazebo>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>30.0</updateRate>
+                <cameraName>camera</cameraName>
+                <imageTopicName>/camera/image_raw</imageTopicName>
+                <cameraInfoTopicName>/camera/camera_info</cameraInfoTopicName>
+                <frameName>camera_link</frameName>
+                <hackBaseline>0.07</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+                <CxPrime>319.5</CxPrime>
+                <CyPrime>239.5</CyPrime>
+                <focal_length>554.256</focal_length>
+                <Cx>319.5</Cx>
+                <Cy>239.5</Cy>
+                <imageWidth>640</imageWidth>
+                <imageHeight>480</imageHeight>
+                <nearClip>0.1</nearClip>
+                <farClip>100.0</farClip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>
