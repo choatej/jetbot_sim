@@ -19,10 +19,9 @@
                     <cylinder length="0.026" radius="0.0325"/>
                 </geometry>
             </collision>
-
         </link>
 
-        <gazebo reference="${name}">
+        <gazebo reference="${name}_link">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
             <mu1>10.0</mu1>

@@ -1,10 +1,10 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
     <xacro:macro name="camera" params="name parent joint_origin_xyz joint_origin_rpy">
-        <link name="${name}_camera_link">
+        <link name="${name}_camera_board_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.04 0.04 0.02"/>
+                    <box size="0.025 0.025 0.001"/>
                 </geometry>
                 <material name="black">
                     <color rgba="0 0 0 1"/>
@@ -13,7 +13,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.04 0.04 0.02"/>
+                    <box size="0.025 0.025 0.001"/>
                 </geometry>
             </collision>
             <inertial>
@@ -23,11 +23,70 @@
             </inertial>
         </link>
 
-        <joint name="${name}_camera_joint" type="fixed">
+        <joint name="${name}_camera_board_joint" type="fixed">
             <parent link="${parent}"/>
-            <child link="${name}_camera_link"/>
-            <origin rpy="${joint_origin_rpy}" xyz="${joint_origin_xyz}" />
+            <child link="${name}_camera_board_link"/>
+            <origin rpy="${joint_origin_rpy}" xyz="${joint_origin_xyz}"/>
         </joint>
+
+        <gazebo reference="${name}_camera_board_link">
+            <material>Gazebo/Gold</material>
+        </gazebo>
+
+
+        <link name="${name}_camera_bottom_link">
+            <inertial>
+                <mass value="0.1"/>
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <cylinder length="0.01" radius="0.0045"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder length="0.01" radius="0.0045"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${name}_camera_bottom_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 -0.005"/>
+            <parent link="${name}_camera_board_link"/>
+            <child link="${name}_camera_bottom_link"/>
+        </joint>
+
+        <gazebo reference="${name}_camera_bottom_link">
+            <material>Gazebo/Black</material>
+        </gazebo>
+
+        <link name="${name}_camera_top_link">
+            <inertial>
+                <mass value="0.1"/>
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <cylinder length="0.0045" radius="0.006"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder length="0.0045" radius="0.006"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${name}_camera_top_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 -0.0075"/>
+            <parent link="${name}_camera_bottom_link"/>
+            <child link="${name}_camera_top_link"/>
+        </joint>
+
+        <gazebo reference="${name}_camera_top_link">
+            <material>Gazebo/Black</material>
+        </gazebo>
 
         <gazebo>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">

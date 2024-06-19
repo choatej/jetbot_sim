@@ -216,7 +216,7 @@
         joint_origin_xyz = "-0.05977 -0.0315 0.018"
     />
 
-        <xacro:standoff
+    <xacro:standoff
         name = "standoff12"
         radius = "0.0025"
         length = "0.033"
@@ -225,7 +225,7 @@
         joint_origin_xyz = "-0.05977 0.0315 0.018"
     />
 
-        <xacro:standoff
+    <xacro:standoff
         name = "standoff13"
         radius = "0.0025"
         length = "0.033"
@@ -243,16 +243,44 @@
         joint_origin_xyz = "-0.00477 0.0315 0.018"
     />
 
-        <xacro:ydlidar
+    <xacro:ydlidar
         name = "primary"
         parent = "standoff14"
         joint_origin_xyz = "-0.01 -0.032 0.0215"
     />
 
+    <link name="camera_plate_link">
+        <visual>
+          <geometry>
+            <box size="0.022 0.072 0.003"/>
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="0.022 0.072 0.003"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="0.5"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <inertia ixx="0.0008333333333333335" ixy="0" ixz="0" iyy="0.0008333333333333335" iyz="0" izz="0.0008333333333333335"/>
+        </inertial>
+    </link>
+
+    <joint name="camera_plate_joint" type="fixed">
+        <origin rpy="0 -1 0" xyz="0.075 0 0.01" />
+        <parent link="level2_link" />
+        <child link="camera_plate_link" />
+      </joint>
+
+      <gazebo reference="camera_plate_link">
+        <material>Gazebo/Black</material>
+      </gazebo>
+
     <xacro:camera
         name = "front_camera"
-        parent = "level2_link"
-        joint_origin_xyz = "0 0 0"
+        parent = "camera_plate_link"
+        joint_origin_xyz = "0 -0.018 -0.002"
         joint_origin_rpy = "0 0 0"
     />
 
