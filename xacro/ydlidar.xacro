@@ -4,12 +4,12 @@
       <link name="${name}_ydlidar_box_link">
         <visual>
           <geometry>
-            <box size="0.1 -0.071 0.01"/>
+            <box size="0.1 0.071 0.01"/>
           </geometry>
         </visual>
         <collision>
           <geometry>
-            <box size="0.1 -0.071 0.01"/>
+            <box size="0.1 0.071 0.01"/>
           </geometry>
         </collision>
         <inertial>
@@ -47,7 +47,7 @@
       </link>
 
       <joint name="${name}_ydlidar_top_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0.016" />
+        <origin rpy="0 0 0" xyz="0.018 0 0.016" />
         <parent link="${name}_ydlidar_box_link" />
         <child link="${name}_ydlidar_top_link" />
       </joint>
@@ -74,7 +74,7 @@
       </link>
 
       <joint name="${name}_ydlidar_motor_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.03 0 -0.015" />
+        <origin rpy="0 0 0" xyz="-0.04 0 -0.015" />
         <parent link="${name}_ydlidar_box_link" />
         <child link="${name}_ydlidar_motor_link" />
       </joint>

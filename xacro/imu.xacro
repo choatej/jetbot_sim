@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="imu">
-    <xacro:macro name="imu" params="name parent joint_origin_rpy joint_origin_xyz">
+    <xacro:macro name="imu" params="name parent joint_origin_xyz joint_origin_rpy">
+
        <!-- Define the IMU link -->
         <link name="${name}_imu_link">
             <visual>

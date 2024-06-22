@@ -66,7 +66,7 @@ def generate_launch_description():
 
     # Position and orientation
     # [X, Y, Z]
-    position = [0.0, 0.0, 0.2]
+    position = [0.0, 0.0, 0.05]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
 
@@ -88,6 +88,12 @@ def generate_launch_description():
                    ]
     )
 
+    joint_state_publisher = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        output='screen'
+    )
+
         # RVIZ Configuration
     rviz_config_file = os.path.join(get_package_share_directory(package_name), 'rviz', 'config.rviz')
     print(f'rviz config dir: {rviz_config_file}')
@@ -104,6 +110,7 @@ def generate_launch_description():
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
+        joint_state_publisher,
         spawn_robot,
-        # rviz_node,
+        rviz_node,
     ])

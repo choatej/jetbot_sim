@@ -7,6 +7,7 @@
     <xacro:include filename="$(find jetbot_sim)/xacro/ydlidar.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/camera.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/imu.xacro"/>
+    <xacro:include filename="$(find jetbot_sim)/xacro/reflectance-sensor.xacro"/>
 
     <!-- odom, so base_link can have inertia -->
     <link name="odom"/>
@@ -15,7 +16,7 @@
     <xacro:base-plate
         name = "base"
         parent = "odom"
-        joint_origin_xyz = "0 0 0.043"
+        joint_origin_xyz = "0 0 0"
     />
 
     <xacro:standoff
@@ -101,7 +102,7 @@
     <xacro:base-plate
         name = "level3"
         parent = "standoff6"
-        joint_origin_xyz = "-0.06277 -0.04275 0.039"
+        joint_origin_xyz = "-0.06277 -0.04275 0.04"
     />
 
     <xacro:wheel
@@ -119,7 +120,7 @@
     <xacro:standoff
         name = "standoff9"
         radius = "0.0025"
-        length = "0.0245"
+        length = "0.023"
         mass = "0.1"
         parent = "base_link"
         joint_origin_xyz = "-0.05477 0.02 -0.01375"
@@ -128,7 +129,7 @@
     <xacro:standoff
         name = "standoff10"
         radius = "0.0025"
-        length = "0.0245"
+        length = "0.023"
         mass = "0.1"
         parent = "base_link"
         joint_origin_xyz = "-0.05477 -0.02 -0.01375"
@@ -213,7 +214,7 @@
         length = "0.033"
         mass = "0.1"
         parent = "level3_link"
-        joint_origin_xyz = "-0.05977 -0.0315 0.018"
+        joint_origin_xyz = "-0.025 -0.0315 0.018"
     />
 
     <xacro:standoff
@@ -222,7 +223,7 @@
         length = "0.033"
         mass = "0.1"
         parent = "level3_link"
-        joint_origin_xyz = "-0.05977 0.0315 0.018"
+        joint_origin_xyz = "-0.025 0.0315 0.018"
     />
 
     <xacro:standoff
@@ -231,7 +232,7 @@
         length = "0.033"
         mass = "0.1"
         parent = "level3_link"
-        joint_origin_xyz = "-0.00477 -0.0315 0.018"
+        joint_origin_xyz = "0.035 -0.0315 0.018"
     />
 
     <xacro:standoff
@@ -240,13 +241,13 @@
         length = "0.033"
         mass = "0.1"
         parent = "level3_link"
-        joint_origin_xyz = "-0.00477 0.0315 0.018"
+        joint_origin_xyz = "0.035 0.0315 0.018"
     />
 
     <xacro:ydlidar
         name = "primary"
         parent = "standoff14"
-        joint_origin_xyz = "-0.01 -0.032 0.0215"
+        joint_origin_xyz = "-0.04 -0.032 0.0215"
     />
 
     <link name="camera_plate_link">
@@ -280,14 +281,95 @@
     <xacro:camera
         name = "front_camera"
         parent = "camera_plate_link"
-        joint_origin_xyz = "0 -0.018 -0.002"
+        joint_origin_xyz = "0 -0.014 -0.002"
         joint_origin_rpy = "0 0 0"
     />
 
+    <xacro:standoff
+            name ="standoff15"
+            radius = "0.0025"
+            length = "0.01"
+            mass = "0.5"
+            parent = "level3_link"
+            joint_origin_xyz = "0.0275 -0.04 0.0065"
+        />
+
+        <xacro:standoff
+            name ="standoff16"
+            radius = "0.0025"
+            length = "0.01"
+            mass = "0.5"
+            parent = "level3_link"
+            joint_origin_xyz = "0.0275 -0.02 0.0065"
+        />
+
     <xacro:imu
         name = "default"
-        parent = "level3_link"
-        joint_origin_xyz = "0 -0.03975 0.02"
-        joint_origin_rpy = "0 0 0"
+        parent = "standoff15"
+        joint_origin_xyz = "-0.005 0.01 0.005"
+        joint_origin_rpy = "0 0 1.5708"
     />
+
+    <xacro:reflectance-sensor
+        name = "front"
+        parent = "camera_plate_link"
+        joint_origin_xyz = "-0.01 0.014 -0.002"
+    />
+
+    <!-- PLUGINS -->
+  <!-- JOINT PUBLISHER -->
+  <gazebo>
+    <plugin name="jetbot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <update_rate>30</update_rate>
+      <joint_name>left_wheel_joint</joint_name>
+      <joint_name>right_wheel_joint</joint_name>
+      <joint_name>caster_ball_yaw_joint</joint_name>
+      <joint_name>caster_ball_roll_joint</joint_name>
+      <joint_name>caster_ball_pitch_joint</joint_name>
+    </plugin>
+  </gazebo>
+
+  <!-- Differential drive -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+      <!-- wheels -->
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <!-- kinematics -->
+      <wheel_separation>0.13</wheel_separation>
+      <wheel_diameter>0.065</wheel_diameter>
+      <!-- limits -->
+      <max_wheel_torque>1.0</max_wheel_torque>
+      <max_wheel_acceleration>2.0</max_wheel_acceleration>
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </gazebo>
+
+  <!-- Position Config -->
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="default_ydlidar_top_joint">
+      <command_interface name="position">
+        <param name="min">-0.05</param>
+        <param name="max">0.0</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find jetbot_sim)/config/controller_position_velocity.yaml</parameters>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+    </plugin>
+  </gazebo>
+
 </robot>
