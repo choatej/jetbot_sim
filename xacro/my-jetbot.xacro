@@ -5,7 +5,7 @@
     <xacro:include filename="$(find jetbot_sim)/xacro/wheel.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/base-plate.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/ydlidar.xacro"/>
-    <xacro:include filename="$(find jetbot_sim)/xacro/camera.xacro"/>
+    <xacro:include filename="$(find jetb3ot_sim)/xacro/camera.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/imu.xacro"/>
     <xacro:include filename="$(find jetbot_sim)/xacro/reflectance-sensor.xacro"/>
 
@@ -23,7 +23,7 @@
         name ="standoff1"
         radius = "0.0025"
         length = "0.0393"
-        mass = "0.5"
+        mass = "0.008"
         parent = "base_link"
         joint_origin_xyz = "-0.06277 0.042975 0.01975"
     />
@@ -32,7 +32,7 @@
         name ="standoff2"
         radius = "0.0025"
         length = "0.0393"
-        mass = "0.5"
+        mass = "0.008"
         parent = "base_link"
         joint_origin_xyz = "0.06277 0.042975 0.01975"
     />
@@ -41,7 +41,7 @@
         name ="standoff3"
         radius = "0.0025"
         length = "0.0393"
-        mass = "0.5"
+        mass = "0.008"
         parent = "base_link"
         joint_origin_xyz = "0.06277 -0.042975 0.01975"
     />
@@ -50,7 +50,7 @@
         name ="standoff4"
         radius = "0.0025"
         length = "0.0393"
-        mass = "0.5"
+        mass = "0.008"
         parent = "base_link"
         joint_origin_xyz = "-0.06277 -0.042975 0.01975"
     />
@@ -66,7 +66,7 @@
         name ="standoff5"
         radius = "0.0025"
         length = "0.081"
-        mass = "0.5"
+        mass = "0.016"
         parent = "level2_link"
         joint_origin_xyz = "-0.06277 0.042975 0.01975"
     />
@@ -75,7 +75,7 @@
         name ="standoff6"
         radius = "0.0025"
         length = "0.081"
-        mass = "0.5"
+        mass = "0.016"
         parent = "level2_link"
         joint_origin_xyz = "0.06277 0.042975 0.01975"
     />
@@ -84,7 +84,7 @@
         name ="standoff7"
         radius = "0.0025"
         length = "0.081"
-        mass = "0.5"
+        mass = "0.016"
         parent = "level2_link"
         joint_origin_xyz = "0.06277 -0.042975 0.01975"
     />
@@ -93,7 +93,7 @@
         name ="standoff8"
         radius = "0.0025"
         length = "0.081"
-        mass = "0.5"
+        mass = "0.016"
         parent = "level2_link"
         joint_origin_xyz = "-0.06277 -0.042975 0.01975"
     />
@@ -121,7 +121,7 @@
         name = "standoff9"
         radius = "0.0025"
         length = "0.023"
-        mass = "0.1"
+        mass = "0.004"
         parent = "base_link"
         joint_origin_xyz = "-0.05477 0.02 -0.01375"
     />
@@ -130,7 +130,7 @@
         name = "standoff10"
         radius = "0.0025"
         length = "0.023"
-        mass = "0.1"
+        mass = "0.004"
         parent = "base_link"
         joint_origin_xyz = "-0.05477 -0.02 -0.01375"
     />
@@ -147,7 +147,7 @@
           </geometry>
         </collision>
         <inertial>
-          <mass value="0.5"/>
+          <mass value="0.003"/>
           <origin rpy="0 0 0" xyz="0 0 0"/>
           <inertia ixx="0.0008333333333333335" ixy="0" ixz="0" iyy="0.0008333333333333335" iyz="0" izz="0.0008333333333333335"/>
         </inertial>
@@ -176,7 +176,7 @@
           </geometry>
         </collision>
         <inertial>
-          <mass value="0.01"/>
+          <mass value="0.015"/>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
         </inertial>
@@ -212,7 +212,7 @@
         name = "standoff11"
         radius = "0.0025"
         length = "0.033"
-        mass = "0.1"
+        mass = "0.006"
         parent = "level3_link"
         joint_origin_xyz = "-0.025 -0.0315 0.018"
     />
@@ -221,7 +221,7 @@
         name = "standoff12"
         radius = "0.0025"
         length = "0.033"
-        mass = "0.1"
+        mass = "0.006"
         parent = "level3_link"
         joint_origin_xyz = "-0.025 0.0315 0.018"
     />
@@ -230,7 +230,7 @@
         name = "standoff13"
         radius = "0.0025"
         length = "0.033"
-        mass = "0.1"
+        mass = "0.006"
         parent = "level3_link"
         joint_origin_xyz = "0.035 -0.0315 0.018"
     />
@@ -239,7 +239,7 @@
         name = "standoff14"
         radius = "0.0025"
         length = "0.033"
-        mass = "0.1"
+        mass = "0.006"
         parent = "level3_link"
         joint_origin_xyz = "0.035 0.0315 0.018"
     />
@@ -262,7 +262,7 @@
           </geometry>
         </collision>
         <inertial>
-          <mass value="0.5"/>
+          <mass value="0.008"/>
           <origin rpy="0 0 0" xyz="0 0 0"/>
           <inertia ixx="0.0008333333333333335" ixy="0" ixz="0" iyy="0.0008333333333333335" iyz="0" izz="0.0008333333333333335"/>
         </inertial>
@@ -289,7 +289,7 @@
             name ="standoff15"
             radius = "0.0025"
             length = "0.01"
-            mass = "0.5"
+            mass = "0.002"
             parent = "level3_link"
             joint_origin_xyz = "0.0275 -0.04 0.0065"
         />
@@ -297,7 +297,7 @@
         <xacro:standoff
             name ="standoff16"
             radius = "0.0025"
-            length = "0.01"
+            length = "0.002"
             mass = "0.5"
             parent = "level3_link"
             joint_origin_xyz = "0.0275 -0.02 0.0065"
@@ -316,60 +316,61 @@
         joint_origin_xyz = "-0.01 0.014 -0.002"
     />
 
-    <!-- PLUGINS -->
-  <!-- JOINT PUBLISHER -->
-  <gazebo>
-    <plugin name="jetbot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
-      <update_rate>30</update_rate>
-      <joint_name>left_wheel_joint</joint_name>
-      <joint_name>right_wheel_joint</joint_name>
-      <joint_name>caster_ball_yaw_joint</joint_name>
-      <joint_name>caster_ball_roll_joint</joint_name>
-      <joint_name>caster_ball_pitch_joint</joint_name>
-    </plugin>
-  </gazebo>
+<!-- PLUGINS -->
+<!-- JOINT PUBLISHER -->
+<gazebo>
+  <plugin name="jetbot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+    <update_rate>30</update_rate>
+    <joint_name>left_wheel_joint</joint_name>
+    <joint_name>right_wheel_joint</joint_name>
+    <joint_name>caster_ball_yaw_joint</joint_name>
+    <joint_name>caster_ball_roll_joint</joint_name>
+    <joint_name>caster_ball_pitch_joint</joint_name>
+  </plugin>
+</gazebo>
 
-  <!-- Differential drive -->
-  <gazebo>
-    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-      <!-- wheels -->
-      <left_joint>left_wheel_joint</left_joint>
-      <right_joint>right_wheel_joint</right_joint>
-      <!-- kinematics -->
-      <wheel_separation>0.13</wheel_separation>
-      <wheel_diameter>0.065</wheel_diameter>
-      <!-- limits -->
-      <max_wheel_torque>1.0</max_wheel_torque>
-      <max_wheel_acceleration>2.0</max_wheel_acceleration>
-      <!-- output -->
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-    </plugin>
-  </gazebo>
+<!-- Differential drive -->
+<gazebo>
+  <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+    <!-- wheels -->
+    <left_joint>left_wheel_joint</left_joint>
+    <right_joint>right_wheel_joint</right_joint>
+    <!-- kinematics -->
+    <wheel_separation>0.13</wheel_separation>
+    <wheel_diameter>0.065</wheel_diameter>
+    <!-- limits -->
+    <max_wheel_torque>1.0</max_wheel_torque>
+    <max_wheel_acceleration>2.0</max_wheel_acceleration>
+    <!-- output -->
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <odometry_frame>odom</odometry_frame>
+    <robot_base_frame>base_link</robot_base_frame>
+    <!-- cmd_vel topic -->
+    <command_topic>/cmd_vel</command_topic>
+  </plugin>
+</gazebo>
 
-  <!-- Position Config -->
-  <ros2_control name="GazeboSystem" type="system">
-    <hardware>
-      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-    </hardware>
-    <joint name="default_ydlidar_top_joint">
-      <command_interface name="position">
-        <param name="min">-0.05</param>
-        <param name="max">0.0</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-  </ros2_control>
+<!-- Position Config -->
+<ros2_control name="GazeboSystem" type="system">
+  <hardware>
+    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+  </hardware>
+  <joint name="default_ydlidar_top_joint">
+    <command_interface name="position">
+      <param name="min">-0.05</param>
+      <param name="max">0.0</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+    <state_interface name="effort"/>
+  </joint>
+</ros2_control>
 
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find jetbot_sim)/config/controller_position_velocity.yaml</parameters>
-      <robot_param_node>robot_state_publisher</robot_param_node>
-    </plugin>
-  </gazebo>
-
+<gazebo>
+  <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+    <parameters>$(find jetbot_sim)/config/controller_position_velocity.yaml</parameters>
+    <robot_param_node>robot_state_publisher</robot_param_node>
+  </plugin>
+</gazebo>
 </robot>

@@ -27,13 +27,9 @@ endif()
 
 install(
   DIRECTORY
-    urdf
-    launch
-	worlds
-	models
-	rviz
-	meshes
 	config
+    launch
+	rviz
 	xacro
   DESTINATION
     share/${PROJECT_NAME}/
